@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho de Classes e Objetos</title>
+</head>
+<body>
+
+    <style>
+        body{
+            text-align: center;
+            margin-left: 25px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        h1{
+            font-size: 55px;
+        }
+        h2{
+            font-size: 40px;
+        }
+        h3,h4{
+            font-size: 30px;
+        }
+        p{
+            font-size: 25px;
+        }
+    </style>
+
+    <script>
+        class Pessoa {
+            constructor(cpf, nome){
+                this.cpf = cpf;
+                this.nome = nome;
+            }
+        }
+
+        class Professor extends Pessoa {
+            constructor(cpf, nome, area, telefone){
+                super(cpf, nome);
+                this.area = area;
+                this.telefone = telefone;
+            }
+        }
+
+        class Aluno extends Pessoa {
+            constructor(cpf, nome, matricula){
+                super(cpf, nome);
+                this.matricula = matricula;
+            }
+        }
+
+        class Turma {
+            constructor(professor, alunos, identificacao){
+                this.professor = professor;
+                this.alunos = alunos;
+                this.identificacao = identificacao;
+            }
+
+        imprimeDados() {
+            console.log(`Turma: ${this.identificacao}`);
+            console.log(`Professor: ${this.professor.nome}, Área: ${this.professor.area}, Telefone: ${this.professor.telefone}`);
+            console.log("Alunos: ");
+            this.alunos.forEach(aluno => {
+                    console.log(`Nome: ${aluno.nome}, Matrícula: ${aluno.matricula}`);
+                });
+            }
+        }
+
+        let professor1 = new Professor ("12345678910", "Raquel", "Introdução A Programação", "53-9153-3179");
+        let professor2 = new Professor ("12345678911", "Rafael", "Tecnomaker", "53-9237-1678");
+
+        const bruno = new Aluno("12345678912", "Bruno", "11030491");
+        const jorge = new Aluno("12345678913", "Jorge", "11030492");
+        const fernando = new Aluno("12345678914", "Fernando", "11030493");
+        const marcelo = new Aluno("12345678915", "Marcelo", "11030494");
+        const douglas = new Aluno("12345678916", "Douglas", "11030495");
+        const naldo = new Aluno("12345678917", "Naldo", "11030496");
+
+        const turma1 = new Turma(professor1, [bruno, jorge, fernando, marcelo], "Turma de IPR");
+        const turma2 = new Turma(professor2, [douglas, naldo, marcelo, fernando], "Turma de TCK");
+        let divi = document.createElement("div");
+        divi.innerHTML = "<h1>DADOS DAS TURMAS</h1>";
+        document.body.appendChild(divi);
+
+        function imprimirTurma(turma) {
+            const turmaDiv = document.createElement("div");
+            turmaDiv.innerHTML = `<h2>Identificação da Turma: ${turma.identificacao}</h2>`;
+            turmaDiv.innerHTML += `<h3>Professor: ${turma.professor.nome}, Área: ${turma.professor.area}, Telefone: ${turma.professor.telefone}</3>`;
+            turmaDiv.innerHTML += "<h4>Alunos:</h4>";
+            turma.alunos.forEach(aluno => {
+                turmaDiv.innerHTML += `<p>Nome: ${aluno.nome}, Matrícula: ${aluno.matricula}</p>`;
+            });
+            divi.appendChild(turmaDiv);
+        }
+
+        imprimirTurma(turma1);
+        imprimirTurma(turma2);
+
+
+    </script>
+</body>
+</html>
